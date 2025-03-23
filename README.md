@@ -25,6 +25,17 @@
 pip install .
 ```
 
+## VASP environment setup
+* When using VASP, the following environment variables must be set:
+
+1. VASP execution command (one of the following)
+   - `ASE_VASP_COMMAND`
+   - `VASP_COMMAND`
+   - `VASP_SCRIPT`
+
+2. Pseudopotential path
+   - `VASP_PP_PATH`
+
 ## Usage
 
 ### Band gap calculation
@@ -61,18 +72,3 @@ print(f"oxygen vacancy formation energy = {vacancy:5.3f} eV")
 print(f"proton formation energy = {oh:5.3f} eV")
 ```
 
-## VASP environment setup
-
-When using VASP, the following environment variables must be set:
-
-1. VASP execution command (one of the following)
-   - `ASE_VASP_COMMAND`
-   - `VASP_COMMAND`
-   - `VASP_SCRIPT`
-
-2. Pseudopotential path
-   - `VASP_PP_PATH`
-
-## License
-
-Not specified
