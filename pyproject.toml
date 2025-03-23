@@ -1,11 +1,15 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "property"
-version = "0.1.0"
-requires-python = "~=3.12"
+version = "0.0.1"
+authors = [
+  {name = "Yang Long", email = "yang.l.al@m.titech.ac.jp"},
+  {name = "Atsushi Ishikawa", email = "ishikawa.a.ai@m.titech.ac.jp"},
+]
+requires-python = "<3.13"
 dependencies = [
     "ase~=3.24",
     "pymatgen==2025.3.10",
