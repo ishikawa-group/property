@@ -72,3 +72,7 @@ print(f"oxygen vacancy formation energy = {vacancy:5.3f} eV")
 print(f"proton formation energy = {oh:5.3f} eV")
 ```
 
+## Authors
+* Yang Long (https://github.com/Long-Brian-Yang)
+* Atsushi Ishikawa (https://github.com/atsushi-ishikawa)
+
