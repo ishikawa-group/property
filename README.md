@@ -20,6 +20,7 @@
 * matgl == 1.2.1
 
 ## Installation
+* To install the package, run the following command in the root directory of the project:
 
 ```bash
 pip install .
@@ -35,6 +36,13 @@ pip install .
 
 2. Pseudopotential path
    - `VASP_PP_PATH`
+
+Example of setting environment variables in a Unix-like system:
+
+```bash
+export ASE_VASP_COMMAND="path_to_vasp_executable"
+export VASP_PP_PATH="path_to_pseudopotentials"
+```
 
 ## Usage
 
@@ -75,4 +83,3 @@ print(f"proton formation energy = {oh:5.3f} eV")
 ## Authors
 * Yang Long (https://github.com/Long-Brian-Yang)
 * Atsushi Ishikawa (https://github.com/atsushi-ishikawa)
-

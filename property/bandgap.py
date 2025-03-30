@@ -11,7 +11,7 @@ import matgl
 warnings.simplefilter("ignore")  # To suppress warnings for clearer output
 
 
-def get_bandgap(atoms=None, calculator="m3gnet", verbose=False):
+def get_bandgap(atoms=None, verbose=False) -> float:
     """
     Calculate band gap.
 
@@ -22,8 +22,7 @@ def get_bandgap(atoms=None, calculator="m3gnet", verbose=False):
     Returns:
         badngap: Calculated band gap value.
     """
-
-    if "vasp" in calculator:
+    if "vasp" in atoms.calc.name:
         # Check VASP command environment variable is set
         if os.getenv("ASE_VASP_COMMAND"):
             if verbose:
@@ -35,11 +34,11 @@ def get_bandgap(atoms=None, calculator="m3gnet", verbose=False):
             if verbose:
                 print("VASP_SCRIPT is set to:", os.getenv("VASP_SCRIPT"))
         else:
-            raise EnvironmentError("One of ASE_VASP_COMMAND, VASP_COMMAND, VASP_SCRIPT should be set. Please ensure it is correctly set in your environment.")
+            raise EnvironmentError("Error: One of ASE_VASP_COMMAND, VASP_COMMAND, VASP_SCRIPT should be set.")
 
         # Check if VASP_PP_PATH is set
         if not os.getenv("VASP_PP_PATH"):
-            raise EnvironmentError("VASP_PP_PATH is not set. Please ensure it is correctly set in your environment.")
+            raise EnvironmentError("Error: VASP_PP_PATH is not set.")
 
         if verbose:
             print("VASP_PP_PATH is set to:", os.getenv("VASP_PP_PATH"))
@@ -63,12 +62,14 @@ def get_bandgap(atoms=None, calculator="m3gnet", verbose=False):
         # Calculate band gap
         gap, _, _ = bandgap(atoms.calc, direct=False)
 
-    else:  # m3gnet
+    elif "pescalculator" in atoms.calc.name:  # matgl
         model = matgl.load_model("MEGNet-MP-2019.4.1-BandGap-mfi")
         imethod = 0   # 0: PBE, 1: GLIB-SC, 2: HSE, 3: SCAN
         state_attr = torch.tensor([imethod])
         structure = AseAtomsAdaptor.get_structure(atoms)
         gap = model.predict_structure(structure=structure, state_attr=state_attr)
 
-    return gap
+    else:
+        raise ValueError("Unknown calculator.")
 
+    return gap

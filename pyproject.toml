@@ -12,6 +12,6 @@ authors = [
 requires-python = "<3.13"
 dependencies = [
     "ase~=3.24",
-    "pymatgen==2025.3.10",
+    "pymatgen>=2025.1.9",
     "matgl==1.2.1",
 ]
