@@ -68,6 +68,7 @@ def get_bandgap(atoms=None, verbose=False) -> float:
         state_attr = torch.tensor([imethod])
         structure = AseAtomsAdaptor.get_structure(atoms)
         gap = model.predict_structure(structure=structure, state_attr=state_attr)
+        gap = float(gap)
 
     else:
         raise ValueError("Unknown calculator.")
