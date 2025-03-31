@@ -11,7 +11,7 @@ import matgl
 warnings.simplefilter("ignore")  # To suppress warnings for clearer output
 
 
-def get_bandgap(atoms=None, verbose=False) -> float:
+def get_bandgap(atoms=None, calculator="m3gnet", verbose=False) -> float:
     """
     Calculate band gap.
 
@@ -22,7 +22,7 @@ def get_bandgap(atoms=None, verbose=False) -> float:
     Returns:
         badngap: Calculated band gap value.
     """
-    if "vasp" in atoms.calc.name:
+    if "vasp" in calculator:
         # Check VASP command environment variable is set
         if os.getenv("ASE_VASP_COMMAND"):
             if verbose:
@@ -62,7 +62,7 @@ def get_bandgap(atoms=None, verbose=False) -> float:
         # Calculate band gap
         gap, _, _ = bandgap(atoms.calc, direct=False)
 
-    elif "pescalculator" in atoms.calc.name:  # matgl
+    elif "m3gnet" in calculator:
         model = matgl.load_model("MEGNet-MP-2019.4.1-BandGap-mfi")
         imethod = 0   # 0: PBE, 1: GLIB-SC, 2: HSE, 3: SCAN
         state_attr = torch.tensor([imethod])
